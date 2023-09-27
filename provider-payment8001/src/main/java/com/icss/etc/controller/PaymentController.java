@@ -6,10 +6,7 @@ import com.icss.etc.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -22,8 +19,15 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
+    /**
+     * 新增数据
+     * postman访问 http://localhost:8001/payment/create?serial=1
+     *
+     * @param payment
+     * @return
+     */
     @PostMapping(value = "/payment/create")
-    public CommonResult create(Payment payment) {
+    public CommonResult create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
         log.info("*****插入结果：" + result);
 
@@ -34,6 +38,13 @@ public class PaymentController {
         }
     }
 
+    /**
+     * 通过id查询数据
+     * http://localhost:8001/payment/get/21
+     *
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/payment/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         Payment payment = paymentService.getPaymentById(id);

@@ -4,7 +4,7 @@
 <mapper namespace="com.icss.etc.dao.PaymentDao">
 
     <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
-        insert into payment(serial)  values(#{serial});
+        insert into payment(serial) values (#{serial});
     </insert>
 
     <resultMap id="BaseResultMap" type="com.icss.etc.pojo.Payment">
@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
-        select * from payment where id=#{id};
+        select * from payment where id = #{id};
     </select>
 
 </mapper>
