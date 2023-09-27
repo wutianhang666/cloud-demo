@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <!--  引入commons模块依赖 -->
+        <dependency>
+            <groupId>com.icss.etc</groupId>
+            <artifactId>cloud-api-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

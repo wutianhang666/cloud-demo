@@ -20,14 +20,27 @@ public class OrderController {
     @Resource
     private RestTemplate restTemplate;
 
+    /**
+     * 通过订单80模块访问支付模块8001的新增方法
+     *
+     * @param payment
+     * @return
+     */
     @GetMapping("/consumer/payment/create")
     public CommonResult<Payment> create(Payment payment) {
 
         return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
     }
 
+    /**
+     * 通过订单80模块访问支付模块8001的查询方法
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
+        System.out.println("通过订单模块 80，访问支付模块 8001");
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
     }
 }
