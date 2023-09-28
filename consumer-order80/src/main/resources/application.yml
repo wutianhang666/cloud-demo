@@ -1,2 +1,14 @@
 server:
   port: 80
+
+spring:
+  application:
+    name: consumer-order80
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+#消费者将要去访问的微服务名称(nacos微服务提供者的的服务名)
+service-url:
+  #使用了 @LoadBalanced负载均衡注解，http://后面不能直接加端口，应该放访问端口对应的nacos中服务名称，代表获取资源的路径
+  nacos-user-service: http://nacos-payment-provider

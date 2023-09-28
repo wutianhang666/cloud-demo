@@ -14,6 +14,8 @@ import javax.annotation.Resource;
 @RestController
 public class OrderController {
 
+    //RestTemplate配置类上不加 @LoadBalanced 负载均衡注解时，当前类中的方法可以调用
+    //加上 @LoadBalanced 注解，http:// 后面不能加端口，需要加端口对应的nacos中服务名称
     //支付模块路径
     public static final String PAYMENT_URL = "http://localhost:8001";
 
