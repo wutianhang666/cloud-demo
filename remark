@@ -1,2 +1,9 @@
 9001,9002,80三个服务测试nacos注册中心和负载均衡
+
 cloud-nacos-fonfig-client3377服务测试nacos的配置中心
+
+9001,9002服务和gateway9527服务测试gateway网关，和gateway负载均衡
+        9001服务访问 http://localhost:9001/payment/nacos/1
+        9002服务访问 http://localhost:9002/payment/nacos/1
+        当使用gateway网关访问时，访问地址为 http://localhost:9527/payment/nacos/1
+        自带负载均衡功能，轮询调用9001和9002服务
