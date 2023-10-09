@@ -3,7 +3,11 @@ server:
 
 spring:
   application:
-    name: cloud-payment-service
+    name: provider-payment8001
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置Nacos地址
   datasource:
     druid:
       test-while-idle: false
