@@ -15,3 +15,7 @@ openfeign服务调用演示 --- 用cloud-consumer-feign-order80，provider-payme
                         http://localhost/consumer/payment/get/22   演示openfeign服务调用
                         http://localhost/consumer/testFeign        演示openfeign服务调用
                         http://localhost/consumer/payment/feign/timeout  演示OpenFeign超时控制
+
+hygtrix服务降级，熔断演示 --- 用provider-hygtrix-payment8001 做根基平台
+                          正常访问 http://localhost:8001/payment/hystrix/ok/123
+                                 http://localhost:8001/payment/hystrix/timeout/123
