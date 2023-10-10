@@ -11,4 +11,7 @@ gateway网关演示 ---   9001,9002服务和gateway9527服务测试gateway网关
                     自带负载均衡功能，轮询调用9001和9002服务
 
 openfeign服务调用演示 --- 用cloud-consumer-feign-order80，provider-payment8001两个服务测试，都注册到nacos
-                        在80中调用8001中的饥接口 http://localhost/consumer/payment/get/22
+                        在80中调用8001中的接口
+                        http://localhost/consumer/payment/get/22   演示openfeign服务调用
+                        http://localhost/consumer/testFeign        演示openfeign服务调用
+                        http://localhost/consumer/payment/feign/timeout  演示OpenFeign超时控制

@@ -29,4 +29,34 @@ public class OrderFeignController {
         return paymentFeignService.getPaymentById(id);
     }
 
+    /**
+     * 演示openfeign服务调用
+     * http://localhost/consumer/testFeign
+     *
+     * @return
+     */
+    @GetMapping(value = "/consumer/testFeign")
+    public String testFeign() {
+        return paymentFeignService.testFeign();
+    }
+
+    /**
+     * 演示OpenFeign超时控制
+     * http://localhost/consumer/payment/feign/timeout
+     * OpenFeign客户端一般默认等待1秒钟
+     * 当前接口调用休眠3秒，所以会报错超时
+     * <p>
+     * 配置文件添加下面配置可以正常调用
+     * #设置feign客户端超时时间(OpenFeign默认支持ribbon)(单位：毫秒)
+     * ribbon:
+     * ReadTimeout: 5000
+     * ConnectTimeout: 5000
+     *
+     * @return
+     */
+    @GetMapping(value = "/consumer/payment/feign/timeout")
+    public String paymentFeignTimeout() {
+        // OpenFeign客户端一般默认等待1秒钟
+        return paymentFeignService.paymentFeignTimeout();
+    }
 }
