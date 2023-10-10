@@ -37,6 +37,7 @@ public class OrderFeignController {
      */
     @GetMapping(value = "/consumer/testFeign")
     public String testFeign() {
+        log.info("调用testFeign方法");
         return paymentFeignService.testFeign();
     }
 
@@ -56,6 +57,7 @@ public class OrderFeignController {
      */
     @GetMapping(value = "/consumer/payment/feign/timeout")
     public String paymentFeignTimeout() {
+        log.info("调用paymentFeignTimeout方法");
         // OpenFeign客户端一般默认等待1秒钟
         return paymentFeignService.paymentFeignTimeout();
     }
