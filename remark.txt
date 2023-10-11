@@ -19,3 +19,8 @@ openfeign服务调用演示 --- 用cloud-consumer-feign-order80，provider-payme
 hygtrix服务降级，熔断演示 --- 用provider-hygtrix-payment8001 做根基平台
                           正常访问 http://localhost:8001/payment/hystrix/ok/123
                                  http://localhost:8001/payment/hystrix/timeout/123
+
+                          用消费服务consumer-feign-hystrix-order80模块调用 8001模块
+                          正常访问 http://localhost/consumer/payment/hystrix/ok/123   （等待5秒访问成功）
+                                 http://localhost/consumer/payment/hystrix/timeout/123   （程序运行5秒，80服务feign设置超时时长为10秒，正常访问）
+                          添加 @HystrixCommand 注解，测试服务降级
