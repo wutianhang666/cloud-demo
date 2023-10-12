@@ -16,7 +16,7 @@ openfeign服务调用演示 --- 用cloud-consumer-feign-order80，provider-payme
                         http://localhost/consumer/testFeign        演示openfeign服务调用
                         http://localhost/consumer/payment/feign/timeout  演示OpenFeign超时控制
 
-hygtrix服务降级，熔断演示 --- 用provider-hygtrix-payment8001 做根基平台
+hygtrix服务降级 --- 用provider-hygtrix-payment8001 做根基平台
                           正常访问 http://localhost:8001/payment/hystrix/ok/123
                                  http://localhost:8001/payment/hystrix/timeout/123
 
@@ -24,3 +24,10 @@ hygtrix服务降级，熔断演示 --- 用provider-hygtrix-payment8001 做根基
                           正常访问 http://localhost/consumer/payment/hystrix/ok/123   （等待5秒访问成功）
                                  http://localhost/consumer/payment/hystrix/timeout/123   （程序运行5秒，80服务feign设置超时时长为10秒，正常访问）
                           添加 @HystrixCommand 注解，测试服务降级
+
+hygtrix服务熔断 --- 用 provider-hygtrix-payment8001服务的 paymentCircuitBreaker方法测试
+                            http://localhost:8001/payment/circuit/1  正常访问
+                            http://localhost:8001/payment/circuit/-1  走服务降级
+                            在10秒内，请求10次，如果有6次失败，就开启熔断器；
+                            服务熔断后，继续访问正确的请求，将不会调用主逻辑，而是直接调用降级 fallback；
+                            默认5秒后，断路器半开状态，会让其中一个请求进行转发，如果成功，断路器会关闭，失败则继续开启
