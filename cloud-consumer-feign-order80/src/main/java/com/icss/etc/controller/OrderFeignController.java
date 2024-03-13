@@ -1,7 +1,9 @@
 package com.icss.etc.controller;
 
 import com.icss.etc.Service.PaymentFeignService;
+import com.icss.etc.Service.Test9191FeignService;
 import com.icss.etc.pojo.CommonResult;
+import com.icss.etc.pojo.FrameProjectDto;
 import com.icss.etc.pojo.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class OrderFeignController {
 
     @Autowired
     private PaymentFeignService paymentFeignService;
+    @Autowired
+    private Test9191FeignService test9191FeignService;
 
     /**
      * 演示openfeign服务调用
@@ -60,5 +64,16 @@ public class OrderFeignController {
         log.info("调用paymentFeignTimeout方法");
         // OpenFeign客户端一般默认等待1秒钟
         return paymentFeignService.paymentFeignTimeout();
+    }
+
+    /**
+     * 测试调用料框模块查项目下拉框接口
+     * @return
+     */
+    @GetMapping(value = "/consumer/test9191")
+    public Object test9191() {
+        log.info("调用9191的方法");
+        FrameProjectDto frameProjectDto = new FrameProjectDto();
+        return test9191FeignService.projectDropdown(frameProjectDto);
     }
 }
