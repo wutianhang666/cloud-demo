@@ -1,9 +1,9 @@
 server:
-  port: 8021
+  port: 8022
 spring:
   #给项目来个名字
   application:
-    name: rabbitmq-provider
+    name: rabbitmq-consumer
   #配置rabbitMq 服务器
   rabbitmq:
     host: 127.0.0.1
