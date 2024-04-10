@@ -3,6 +3,7 @@ package com.icss.etc.contraller;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -19,13 +20,16 @@ public class SendMessageController {
     RabbitTemplate rabbitTemplate;
 
     /**
+     * 测试 直连交换机
+     * <p>
      * 访问：  http://localhost:8021/sendDirectMessage
+     *
      * @return
      */
-    @GetMapping("/sendDirectMessage")
-    public String sendDirectMessage() {
+    @GetMapping("/sendDirectMessage/{message}")
+    public String sendDirectMessage(@PathVariable(value = "message") String message) {
         String messageId = String.valueOf(UUID.randomUUID());
-        String messageData = "test message, hello!";
+        String messageData = message;
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         Map<String, Object> map = new HashMap<>();
         map.put("messageId", messageId);
@@ -36,10 +40,24 @@ public class SendMessageController {
         return "请求成功";
     }
 
-    @GetMapping("/aa")
-    public String aa(){
-        System.out.println("11");
-
-        return "22";
+    /**
+     * 测试 扇形交换机
+     * <p>
+     * 访问：  http://localhost:8021/sendDirectMessage
+     *
+     * @return
+     */
+    @GetMapping("/sendFanoutMessage/{message}")
+    public String sendFanoutMessage(@PathVariable(value = "message") String message) {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = message;
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> map = new HashMap<>();
+        map.put("messageId", messageId);
+        map.put("messageData", messageData);
+        map.put("createTime", createTime);
+        rabbitTemplate.convertAndSend("fanoutExchange", null, map);
+        return "ok";
     }
+
 }

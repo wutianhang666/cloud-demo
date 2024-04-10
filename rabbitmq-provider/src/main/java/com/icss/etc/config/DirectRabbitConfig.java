@@ -7,6 +7,10 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
+/**
+ * 直连交换机
+ */
 @Configuration
 public class DirectRabbitConfig {
 
@@ -37,10 +41,4 @@ public class DirectRabbitConfig {
     Binding bindingDirect() {
         return BindingBuilder.bind(TestDirectQueue()).to(TestDirectExchange()).with("TestDirectRouting");
     }
-
-    @Bean
-    DirectExchange lonelyDirectExchange() {
-        return new DirectExchange("lonelyDirectExchange");
-    }
-
 }
